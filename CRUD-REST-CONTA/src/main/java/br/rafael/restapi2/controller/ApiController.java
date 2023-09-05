@@ -1,9 +1,9 @@
 package br.rafael.restapi2.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.rafael.restapi2.model.User;
 import br.rafael.restapi2.service.ServiceConta;
 import br.rafael.restapi2.service.ServiceTransacao;
 
@@ -39,6 +38,10 @@ public class ApiController {
     private Map<String,Object> getContaId(@PathVariable Long id) {
         return contaService.getContaId(id);
     }
+    @GetMapping("/consultar_limite/conta/{id}")
+    private String getLimiteContaId(@PathVariable Long id) {
+        return contaService.getLimiteContaId(id);
+    }
     
 //    @GetMapping("/hello")
 //    private List<User> hello(){
@@ -54,8 +57,14 @@ public class ApiController {
     }
     
     @PostMapping("/transacao")
-    private void createTransacao(@RequestBody Map<String,String> payload) {
-    	transacaoService.createTransacao(payload);
+    private ResponseEntity<Object> createTransacao(@RequestBody Map<String,String> payload) {
+    	try {
+			return ResponseEntity.ok(transacaoService.createTransacao(payload) );
+		} catch (Exception e) {
+			String msgError="valor acima do limite";
+			System.err.println(msgError);
+			return ResponseEntity.badRequest().body(msgError);
+		}
     }
     
 

@@ -15,9 +15,20 @@ public class ServiceConta  {
 	public Map<String,Object> getContaId(Long id) {
         return repoConta.getContaId(id);
     }
-
+	
+	public String getLimiteContaId(Long id) {
+        return repoConta.getLimiteContaId(id);
+	}
 
     public void createConta(Map<String,String> payload) {
-    	repoConta.createConta(payload);
+    	Double limite = Double.parseDouble(payload.get("limite"));
+    	//nao permitir criar conta com limite negativo
+    	if(limite<0) {
+    		return;
+    	}else {
+    		repoConta.createConta(payload);
+    	}    	
     }
+
+
 }
