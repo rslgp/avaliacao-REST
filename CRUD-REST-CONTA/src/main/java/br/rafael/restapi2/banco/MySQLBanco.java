@@ -18,8 +18,8 @@ public class MySQLBanco {
 	private String url = "jdbc:mysql://localhost/mydatabase";
 	private String user = "root";
     private String password = "";
-    private Connection connection;
-    private PreparedStatement preparedStatement;
+    protected Connection connection;
+    protected PreparedStatement preparedStatement;
     
 	public MySQLBanco(String url, String user, String password) {
 		try {
@@ -55,62 +55,62 @@ public class MySQLBanco {
 //		}
 //	}
 	
-	public void createConta(Map<String, String> payload) {
-		// TODO Auto-generated method stub
-		String numeroConta = payload.get("numero_conta");
-		
-		 String insertQuery = "INSERT INTO conta (numero) VALUES (?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
-            preparedStatement.setString(1, numeroConta);
-            int rowsInserted = preparedStatement.executeUpdate();
-            System.out.println("Inserted " + rowsInserted + " row(s)");
-        } catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public void createConta(Map<String, String> payload) {
+//		// TODO Auto-generated method stub
+//		String numeroConta = payload.get("numero_conta");
+//		
+//		 String insertQuery = "INSERT INTO conta (numero) VALUES (?)";
+//        try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+//            preparedStatement.setString(1, numeroConta);
+//            int rowsInserted = preparedStatement.executeUpdate();
+//            System.out.println("Inserted " + rowsInserted + " row(s)");
+//        } catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	public String getContaId(Long id) {
+//		// TODO Auto-generated method stub
+//		String sqlQuery = "select * from conta where id = ?";
+//		String result = "";
+//		try {
+//			preparedStatement = connection.prepareStatement(sqlQuery);
+//            preparedStatement.setLong(1, id);
+//			ResultSet resultSet = preparedStatement.executeQuery();
+//	        while (resultSet.next()) {
+//	            Long id2 = resultSet.getLong("id");
+//	            Long numero = resultSet.getLong("numero");
+//	            
+//	            return "{ \"conta_id\": "+id2+", \"numero_documento\":"+numero+"}\n";
+//	        }
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 	
-	public String getContaId(Long id) {
-		// TODO Auto-generated method stub
-		String sqlQuery = "select * from conta where id = ?";
-		String result = "";
-		try {
-			preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setLong(1, id);
-			ResultSet resultSet = preparedStatement.executeQuery();
-	        while (resultSet.next()) {
-	            Long id2 = resultSet.getLong("id");
-	            Long numero = resultSet.getLong("numero");
-	            
-	            return "{ \"conta_id\": "+id2+", \"numero_documento\":"+numero+"}\n";
-	        }
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	public void createTransacao(Map<String, String> payload) {
-		// TODO Auto-generated method stub
-		String numeroConta = payload.get("numero_conta");
-		
-		 String insertQuery = "INSERT INTO transacao (Conta_id, TipoOperacao_id, valor, DataTransacao) VALUES (?,?,?,?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
-            preparedStatement.setString(1, payload.get("conta_id"));
-            preparedStatement.setString(2, payload.get("tipo_operacao_id"));
-            preparedStatement.setString(3, payload.get("valor"));
-            
-            preparedStatement.setString(4, LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
-            
-            int rowsInserted = preparedStatement.executeUpdate();
-            System.out.println("Inserted " + rowsInserted + " row(s)");
-        } catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+//	public void createTransacao(Map<String, String> payload) {
+//		// TODO Auto-generated method stub
+//		String numeroConta = payload.get("numero_conta");
+//		
+//		 String insertQuery = "INSERT INTO transacao (Conta_id, TipoOperacao_id, valor, DataTransacao) VALUES (?,?,?,?)";
+//        try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+//            preparedStatement.setString(1, payload.get("conta_id"));
+//            preparedStatement.setString(2, payload.get("tipo_operacao_id"));
+//            preparedStatement.setString(3, payload.get("valor"));
+//            
+//            preparedStatement.setString(4, LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+//            
+//            int rowsInserted = preparedStatement.executeUpdate();
+//            System.out.println("Inserted " + rowsInserted + " row(s)");
+//        } catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//	}
 	
 	
 }
