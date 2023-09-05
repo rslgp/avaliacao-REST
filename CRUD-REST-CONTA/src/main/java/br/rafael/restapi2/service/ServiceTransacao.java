@@ -37,7 +37,7 @@ public class ServiceTransacao{
 
     	valor = Double.parseDouble(payload.get("valor"));
         	
-    	if(tipoTransacao=="4") {
+    	if(tipoTransacao.equals("4")) {
     		limite+=valor;
     	}else {	
         	//se o valor esta dentro do limite
