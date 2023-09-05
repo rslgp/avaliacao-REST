@@ -52,6 +52,6 @@ public class ServiceTransacao{
     	
     	repoTransacao.createTransacao(payload);
     	
-    	return 0;
+    	return 200;
     }
 }
