@@ -24,7 +24,7 @@ public class ContaRepository extends MySQLBanco {
 	}
 	
 
-	public String getContaId(Long id) {
+	public Map<String, Object> getContaId(Long id) {
 		// TODO Auto-generated method stub
 		String sqlQuery = "select * from "+tabela+" where id = ?";
 		String result = "";
@@ -36,7 +36,9 @@ public class ContaRepository extends MySQLBanco {
 	            Long id2 = resultSet.getLong("id");
 	            Long numero = resultSet.getLong("numero");
 	            
-	            return "{ \"conta_id\": "+id2+", \"numero_documento\":"+numero+"}\n";
+	            
+	            return Map.of("conta_id",id2,"numero_documento",numero.toString());
+	            //return "{ \"conta_id\": "+id2+", \"numero_documento\":"+numero+"}\n";
 	        }
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

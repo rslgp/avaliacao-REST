@@ -1,5 +1,6 @@
 package br.rafael.restapi2.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,7 @@ public class ServiceConta  {
     private ContaRepository repoConta = new ContaRepository();
     
     @GetMapping("/conta/{id}")
-	public String getContaId(@PathVariable Long id) {
+	public Map<String,Object> getContaId(@PathVariable Long id) {
         return repoConta.getContaId(id);
     }
 
