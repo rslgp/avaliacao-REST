@@ -37,15 +37,15 @@ public class ServiceTransacao{
 
     	valor = Double.parseDouble(payload.get("valor"));
         	
-    	//se o valor esta dentro do limite
-    	if(limite >= Math.abs(valor)) {
-    		limite += valor;
-    	}else {
-    		throw new Exception("valor acima do limite");
-    	}
-    	
     	if(tipoTransacao=="4") {
     		limite+=valor;
+    	}else {	
+        	//se o valor esta dentro do limite
+        	if(limite >= Math.abs(valor)) {
+        		limite += valor;
+        	}else {
+        		throw new Exception("valor acima do limite");
+        	}    		
     	}
     	
     	repoConta.updateLimite(contaid, limite);
