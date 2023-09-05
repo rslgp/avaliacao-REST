@@ -3,6 +3,7 @@ package br.rafael.restapi2.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.rafael.restapi2.model.User;
 import br.rafael.restapi2.service.ServiceConta;
 import br.rafael.restapi2.service.ServiceTransacao;
 
@@ -20,8 +22,15 @@ import br.rafael.restapi2.service.ServiceTransacao;
 public class ApiController {
 	//intermediate user and service
     //private MySQLBanco banco = new MySQLBanco();
-    private ServiceConta contaService = new ServiceConta();    
-    private ServiceTransacao transacaoService = new ServiceTransacao();
+    private final ServiceConta contaService;    
+    private final ServiceTransacao transacaoService;
+    
+    //instead use new Service() no global, usa dependecy injection
+    @Autowired
+    public ApiController(ServiceConta contaService, ServiceTransacao transacaoService) {
+    	this.contaService=contaService;
+    	this.transacaoService=transacaoService;
+	}
     
     /*
      * GET STATEMENTS
@@ -30,7 +39,11 @@ public class ApiController {
     private Map<String,Object> getContaId(@PathVariable Long id) {
         return contaService.getContaId(id);
     }
-
+    
+//    @GetMapping("/hello")
+//    private List<User> hello(){
+//    	return List.of(new User("rafael", "rafael@gmail.com"));
+//    }
 
     /*
      * POST STATEMENTS

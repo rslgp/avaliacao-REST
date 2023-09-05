@@ -1,27 +1,23 @@
 package br.rafael.restapi2.service;
 
-import java.util.List;
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Service;
 
 import br.rafael.restapi2.banco.ContaRepository;
 
+//cria um bean, para ser usado junto com o autowired, dependency injection
+@Service
 public class ServiceConta  {
 
-    private ContaRepository repoConta = new ContaRepository();
+    private final ContaRepository repoConta = new ContaRepository();
     
-    @GetMapping("/conta/{id}")
-	public Map<String,Object> getContaId(@PathVariable Long id) {
+	public Map<String,Object> getContaId(Long id) {
         return repoConta.getContaId(id);
     }
 
 
-    @PostMapping("/conta")
-    public void createConta(@RequestBody Map<String,String> payload) {
+    public void createConta(Map<String,String> payload) {
     	repoConta.createConta(payload);
     }
 }

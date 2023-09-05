@@ -10,6 +10,7 @@ public class ContaRepository extends MySQLBanco {
 	private final String tabela = "conta";
 	
 	public void createConta(Map<String, String> payload) {
+		
 		String numeroConta = payload.get("numero_conta");
 		
 		 String insertQuery = "INSERT INTO "+tabela+" (numero) VALUES (?)";
@@ -25,7 +26,7 @@ public class ContaRepository extends MySQLBanco {
 	
 
 	public Map<String, Object> getContaId(Long id) {
-		// TODO Auto-generated method stub
+		
 		String sqlQuery = "select * from "+tabela+" where id = ?";
 		String result = "";
 		try {

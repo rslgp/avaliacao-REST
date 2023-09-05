@@ -2,16 +2,17 @@ package br.rafael.restapi2.service;
 
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Service;
 
 import br.rafael.restapi2.banco.TransacaoRepository;
 
+
+//cria um bean, para ser usado junto com o autowired, dependency injection
+@Service
 public class ServiceTransacao{
-	private TransacaoRepository repoTransacao = new TransacaoRepository();
+	private final TransacaoRepository repoTransacao = new TransacaoRepository();
     
-    @PostMapping("/transacao")
-    public void createTransacao(@RequestBody Map<String,String> payload) {
+    public void createTransacao(Map<String,String> payload) {
     	//AUTO AJUSTAR converter sozinho caso venha valor errado
     	String tipoTransacao = payload.get("tipo_operacao_id");
 		Double valor = Double.parseDouble(payload.get("valor"));
